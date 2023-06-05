@@ -16,6 +16,8 @@ app.use(cors(corsOptions))
 app.use(express.json())
 app.use(morgan('dev'))
 
+
+
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb')
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.jaehzkc.mongodb.net/?retryWrites=true&w=majority`;
 
@@ -27,6 +29,28 @@ const client = new MongoClient(uri, {
   },
 })
 
+// validate jwt
+const verifyJWT = (req, res, next) => {
+  const authorization = req.headers.authorization;
+  if (!authorization) {
+    return res.status(401).send({ error: true, message: 'Unauthorized Access' })
+  }
+  const token = authorization.split(' ')[1]
+
+
+  // token verify
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+    if (err) {
+      return res.status(401).send({ error: true, message: 'Unauthorized Access' })
+    }
+    req.decoded = decoded;
+    next()
+  })
+
+}
+
+
+
 async function run() {
   try {
     const usersCollection = client.db('aircncDb').collection('users')
@@ -35,12 +59,11 @@ async function run() {
 
 
 
-    // jwt authentication
+    // jwt token generate
     app.post('/jwt', (req, res) => {
       const email = req.body;
-      const token = jwt.sign(email, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' })
-      console.log(token)
-      res.send(token)
+      const token = jwt.sign(email, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '7d' })
+      res.send({ token })
     })
 
 
@@ -81,9 +104,13 @@ async function run() {
       res.send(result)
     })
 
-    // Get a single room
-    app.get('/rooms/:email', async (req, res) => {
+    // Get all rooms of host
+    app.get('/rooms/:email', verifyJWT, async (req, res) => {
+      const decodedEmail = req.decoded.email;
       const email = req.params.email
+      if (decodedEmail !== email) {
+        return res.status(403).send({ error: true, message: 'Forbidden Access' })
+      }
       const query = { 'host.email': email }
       const result = await roomsCollection.find(query).toArray()
 

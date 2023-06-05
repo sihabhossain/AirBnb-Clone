@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
 import Container from "../Shared/Container";
 import Card from "./Card";
 import Loader from "../Shared/Loader";
 import { useSearchParams } from "react-router-dom";
 import Heading from "../Heading/Heading";
 import { getAllRooms } from "../../api/rooms";
+import { useEffect, useState } from "react";
 
 const Rooms = () => {
   const [params, setParams] = useSearchParams();
