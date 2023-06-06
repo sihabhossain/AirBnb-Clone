@@ -4,7 +4,8 @@ import Loader from "../Shared/Loader";
 import { useSearchParams } from "react-router-dom";
 import Heading from "../Heading/Heading";
 import { getAllRooms } from "../../api/rooms";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const Rooms = () => {
   const [params, setParams] = useSearchParams();
