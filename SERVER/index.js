@@ -3,6 +3,7 @@ const app = express()
 const morgan = require('morgan');
 const cors = require('cors')
 const jwt = require('jsonwebtoken')
+const nodemailer = require('nodemailer');
 const stripe = require('stripe')('sk_test_51NEGK2KPTTQ3VkN0vgGzMWJY5gGvJFkLqpM03RjJ1KY2sBuViEki5mpJQWdvp5jOsZ5dNkboTQ1SwX340gRVah4F00kDp4PBTC')
 console.log(process.env.PAYMENT_SECRET_KEY)
 require('dotenv').config()
@@ -50,6 +51,9 @@ const verifyJWT = (req, res, next) => {
   })
 
 }
+
+
+
 
 
 
@@ -185,11 +189,15 @@ async function run() {
       const booking = req.body
 
       const result = await bookingsCollection.insertOne(booking)
+      // send confirmation email to guest email account 
+
+
+      // send confirmation email to host email account
       res.send(result)
     })
 
-    // delete a booking
 
+    // delete a booking
     app.delete('/bookings/:id', async (req, res) => {
       const id = req.params.id
       const query = { _id: new ObjectId(id) }
