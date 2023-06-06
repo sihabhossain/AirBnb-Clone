@@ -3,7 +3,7 @@ const app = express()
 const morgan = require('morgan');
 const cors = require('cors')
 const jwt = require('jsonwebtoken')
-
+const nodemailer = require('nodemailer');
 const stripe = require('stripe')('sk_test_51NEGK2KPTTQ3VkN0vgGzMWJY5gGvJFkLqpM03RjJ1KY2sBuViEki5mpJQWdvp5jOsZ5dNkboTQ1SwX340gRVah4F00kDp4PBTC')
 console.log(process.env.PAYMENT_SECRET_KEY)
 require('dotenv').config()
