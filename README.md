@@ -5,4 +5,5 @@ Airbnb clone is a web application developed using a stack of modern technologies
 
 Live Link: [AirCNC](https://airbnb-clone-a7dd1.web.app/)
 
-<a href="https://ibb.co/KbjJMTK"><img src="https://i.ibb.co/bQgkScb/REACTJS-DEVELOPER.png" alt="REACTJS-DEVELOPER" border="0"></a>
+<a href="https://ibb.co/6gLfmMN"><img src="https://i.ibb.co/WgjY6hs/Screenshot-120.png" alt="Screenshot-120" border="0"></a>
+<br>
