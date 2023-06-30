@@ -1,5 +1,6 @@
-# AirCNC Clone Complete
 
-## Live Link
+# AirBnb Clone
 
-Hosted in Firebase -> [AirCNC]([https://airbnb-clone-a7dd1.web.app/])
+Airbnb clone is a web application developed using a stack of modern technologies to provide users with a platform for finding and booking accommodations. The primary technologies utilized in the development process include React, Express, MongoDB, Firebase, and Tailwind CSS.
+
+Live Link: [AirCNC](https://airbnb-clone-a7dd1.web.app/)
